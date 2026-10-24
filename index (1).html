@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cotizador Omint</title>
+<link rel="icon" href="assets/logo.png">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="wrap">
+<div class="card">
+  <h1>Cotizador Omint — <span id="vigencia"></span></h1>
+  <div class="sub">Elegí hasta 3 planes, completá los datos y generá la imagen para enviar al cliente.</div>
+
+  <div class="section">Datos del cliente</div>
+  <div class="grid">
+    <div><label for="nombre">Nombre y apellido</label><input id="nombre" autocomplete="off"></div>
+    <div><label for="tipo">Tipo de documento</label>
+      <select id="tipo"><option>DNI</option><option>CUIT</option><option>LC</option><option>LE</option></select></div>
+    <div><label for="documento">Número de documento</label><input id="documento" inputmode="numeric" autocomplete="off"></div>
+    <div><label for="integrantes">Cantidad de integrantes</label><input id="integrantes" type="number" min="1" value="1"></div>
+    <div><label for="edades">Edades de adultos (separadas por coma)</label><input id="edades" placeholder="Ej.: 58, 34"></div>
+    <div><label for="hijos">Cantidad de hijos/as</label><input id="hijos" type="number" min="0" value="0"></div>
+    <div><label for="fecha">Fecha</label><input id="fecha" type="date"></div>
+  </div>
+
+  <div class="section">Datos del asesor <small>Se guardan en este navegador para la próxima vez.</small></div>
+  <div class="grid">
+    <div><label for="asesor">Nombre del asesor</label><input id="asesor" class="asesor-field" placeholder="Tu nombre"></div>
+    <div><label for="mail">Mail de contacto</label><input id="mail" class="asesor-field" type="email" placeholder="tu.mail@omint.com.ar"></div>
+    <div><label for="celular">Celular de contacto</label><input id="celular" class="asesor-field" inputmode="tel" placeholder="11 1234 5678"></div>
+    <div><label for="instagram">Instagram del asesor</label><input id="instagram" class="asesor-field" placeholder="usuario"></div>
+  </div>
+  <label class="check-inline"><input type="checkbox" id="recordarAsesor" checked> Recordar mis datos de asesor en este dispositivo</label>
+
+  <div class="section">Observaciones</div>
+  <textarea id="obs" rows="9"></textarea>
+
+  <div class="section">Planes sin copagos</div>
+  <div class="plans" id="planes-sin"></div>
+
+  <div class="section">Planes con copagos</div>
+  <div class="plans" id="planes-con"></div>
+
+  <div id="bloque-otros">
+    <div class="section">Otros planes</div>
+    <div class="plans" id="planes-otros"></div>
+  </div>
+
+  <div class="section">Descuento, IVA y aportes</div>
+  <div class="grid">
+    <div><label for="descuento">Descuento inicial %</label><input id="descuento" type="number" step="0.1"></div>
+    <div><label for="ivaAdicional">IVA adicional (no registra impuestos activos)</label>
+      <select id="ivaAdicional"><option value="no">No</option><option value="si">Sí (10,5%)</option></select></div>
+    <div class="span2"><label for="aporteRecibo">Monto que figura como aporte 3% en el recibo ($)</label><input id="aporteRecibo" type="number" min="0" placeholder="0"></div>
+  </div>
+
+  <div class="hint">
+    El IVA del 10,5% se aplica siempre. Si la persona <b>no registra impuestos activos</b>, elegí "Sí" en IVA adicional y se calcula el 21%.
+    Si hay monto de aporte, el aporte total estimado es ese monto × 2,5 (3% del recibo + 4,5% del empleador) y se descuenta del total.
+    Si no se carga monto, el aporte queda en $0.
+  </div>
+
+  <div class="actions">
+    <button class="primary" id="btnGenerar">Actualizar cotización</button>
+    <button class="secondary" id="btnDescargar">Descargar PNG</button>
+    <button class="secondary" id="btnCompartir" hidden>Compartir</button>
+    <button class="secondary" id="btnLimpiar">Nueva cotización</button>
+  </div>
+
+  <canvas id="canvas"></canvas>
+</div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="js/logo.js"></script>
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
